@@ -1,0 +1,72 @@
+.productList {
+    width: 100%;
+}
+
+.popupBackground {
+    width: 100vw;
+    min-height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    position: fixed;
+    z-index: 1000;
+    top: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.popupContainer {
+    display: flex;
+    justify-content: center;
+    width: 500px;
+    box-shadow: 0 24px 38px 3px rgba(0, 0, 0, 0.14), 0 9px 46px 8px rgba(0, 0, 0, 0.12), 0 11px 15px -7px rgba(0, 0, 0, 0.2);
+    background: #fff;
+    padding: 1em;
+}
+
+.popupBtnContainer {
+    display: flex;
+    justify-content: center;
+}
+
+.productList {
+    width: 100%;
+}
+
+.productList tr {
+    height: 55px;
+}
+
+.productList tr td {
+    vertical-align: middle;
+}
+
+.idCell {
+    width: 10%;
+}
+
+.nameCell {
+    width: 40%;
+}
+
+.numCell {
+    width: 15%;
+}
+
+.priceCell {
+    width: 15%;
+}
+
+.btnCell {
+    width: 20%;
+}
+
+.itemBtnContainer {
+    display: none;
+}
+
+.productList tr:hover .itemBtnContainer {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
