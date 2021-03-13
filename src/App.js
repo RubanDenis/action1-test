@@ -8,10 +8,7 @@ import EditProductPopup from './Components/EditProductPopup';
 
 export default class App extends Component {
   state = {
-    productList: [
-      { id: 1, name: 'name 1', number: '15', price: '45' },
-      { id: 2, name: 'name 2', number: '42', price: '15' }
-    ],
+    productList: [],
     addProduct: false,
     editProduct: false,
     selectedProduct: {}
