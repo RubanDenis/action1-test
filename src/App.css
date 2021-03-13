@@ -29,10 +29,6 @@
     justify-content: center;
 }
 
-.productList {
-    width: 100%;
-}
-
 .productList tr {
     height: 55px;
 }

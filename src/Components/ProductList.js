@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Table } from 'react-bootstrap';
+import Context from '../Context';
 import ListItem from './ListItem';
 
-export default function ProductList(props) {
+export default function ProductList() {
+    const { productList } = useContext(Context);
+
     let totalPrice = 0
     return (
         <>
@@ -17,9 +20,9 @@ export default function ProductList(props) {
                     </tr>
                 </thead>
                 <tbody>
-                    {props.productList.map((product, index) => {
+                    {productList.map((product, index) => {
                         totalPrice = totalPrice + Number(product.price);
-                        return <ListItem product={product} key={product.id} index={index} showEditProductPopup={props.showEditProductPopup} deleteSelectedProduct={props.deleteSelectedProduct} />
+                        return <ListItem product={product} key={product.id} index={index} />
                     })}
                 </tbody>
             </Table>

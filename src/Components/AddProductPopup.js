@@ -1,14 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import Context from '../Context';
 import { Container, Form, Button } from 'react-bootstrap';
 
-export default function AddProductPopup(props) {
+export default function AddProductPopup() {
+    const { hideAddProductPopup, addNewProduct } = useContext(Context);
+
     const [name, setName] = useState('');
     const [number, setNumber] = useState('');
     const [price, setPrice] = useState('');
 
     const handleSubmit = event => {
         event.preventDefault();
-        props.addNewProduct({ name: name, number: number, price: price });
+        addNewProduct({ name: name, number: number, price: price });
     };
 
     return (
@@ -34,7 +37,7 @@ export default function AddProductPopup(props) {
 
                         <Container className='popupBtnContainer'>
                             <Button variant='success' className='mr-3' type='submit'>Добавить</Button>
-                            <Button variant='danger' onClick={() => props.hideAddProductPopup()}>Отмена</Button>
+                            <Button variant='danger' onClick={() => hideAddProductPopup()}>Отмена</Button>
                         </Container>
                     </Form>
                 </Container>

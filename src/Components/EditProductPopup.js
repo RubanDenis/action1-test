@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import Context from '../Context';
 import { Container, Form, Button } from 'react-bootstrap';
 
-export default function EditProductPopup({ hideEditProductPopup, selectedProduct, editSelectedProduct }) {
+export default function EditProductPopup() {
+    const {hideEditProductPopup, selectedProduct, editSelectedProduct } = useContext(Context);
+
     const [name, setName] = useState(selectedProduct.name);
     const [number, setNumber] = useState(selectedProduct.number);
     const [price, setPrice] = useState(selectedProduct.price);

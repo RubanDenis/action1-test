@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Button, Alert } from 'react-bootstrap';
+import Context from './Context';
 import ProductList from './Components/ProductList';
 import AddProductPopup from './Components/AddProductPopup';
 import EditProductPopup from './Components/EditProductPopup';
@@ -15,18 +16,10 @@ export default class App extends Component {
   };
 
   //изменяем флаг, чтобы показать попап добавления товара
-  showAddProductPopup = () => {
-    this.setState({
-      addProduct: true
-    });
-  };
+  showAddProductPopup = () => this.setState({ addProduct: true });
 
   //изменяем флаг, чтобы скрыть попап добавления товара
-  hideAddProductPopup = () => {
-    this.setState({
-      addProduct: false
-    });
-  };
+  hideAddProductPopup = () => this.setState({ addProduct: false });
 
   //добаление нового товара в список
   addNewProduct = product => {
@@ -41,19 +34,10 @@ export default class App extends Component {
   };
 
   //изменяем флаг, чтобы показать попап редактирования товара
-  showEditProductPopup = selectedProduct => {
-    this.setState({
-      selectedProduct: selectedProduct,
-      editProduct: true
-    });
-  };
+  showEditProductPopup = selectedProduct => this.setState({ selectedProduct: selectedProduct, editProduct: true });
 
   //изменяем флаг, чтобы скрыть попап редактирования товара
-  hideEditProductPopup = () => {
-    this.setState({
-      editProduct: false
-    });
-  };
+  hideEditProductPopup = () => this.setState({ editProduct: false });
 
   //сохраняем изменения после редактирования продукта
   editSelectedProduct = changedProduct => {
@@ -69,27 +53,36 @@ export default class App extends Component {
   };
 
   //удаление выбранного продукта
-  deleteSelectedProduct = deletedProduct => {
-    this.setState({
-      productList: this.state.productList.filter(product => product.id !== deletedProduct)
-    });
-  };
+  deleteSelectedProduct = deletedProduct => this.setState({ productList: this.state.productList.filter(product => product.id !== deletedProduct) });
 
   render() {
     return (
       <>
-        {this.state.addProduct ? <AddProductPopup hideAddProductPopup={this.hideAddProductPopup} addNewProduct={this.addNewProduct} /> : ``}
-        {this.state.editProduct ? <EditProductPopup hideEditProductPopup={this.hideEditProductPopup} selectedProduct={this.state.selectedProduct} editSelectedProduct={this.editSelectedProduct} /> : ``}
-        <Container className='mt-5'>
-          <Button variant="outline-success" className="mb-3" onClick={() => this.showAddProductPopup()}>Добавить товар</Button>
+        <Context.Provider value={
           {
-            this.state.productList.length > 0
-              ?
-              <ProductList productList={this.state.productList} showEditProductPopup={this.showEditProductPopup} deleteSelectedProduct={this.deleteSelectedProduct} />
-              :
-              <Alert variant='secondary' className='font-weight-bold'>Список товаров пуст. Создайте товар.</Alert>
+            productList: this.state.productList,
+            showEditProductPopup: this.showEditProductPopup,
+            deleteSelectedProduct: this.deleteSelectedProduct,
+            hideAddProductPopup: this.hideAddProductPopup,
+            addNewProduct: this.addNewProduct,
+            hideEditProductPopup: this.hideEditProductPopup,
+            selectedProduct: this.state.selectedProduct,
+            editSelectedProduct: this.editSelectedProduct
           }
-        </Container>
+        }>
+          {this.state.addProduct ? <AddProductPopup /> : ``}
+          {this.state.editProduct ? <EditProductPopup /> : ``}
+          <Container className='mt-5'>
+            <Button variant="outline-success" className="mb-3" onClick={() => this.showAddProductPopup()}>Добавить товар</Button>
+            {
+              this.state.productList.length > 0
+                ?
+                <ProductList />
+                :
+                <Alert variant='secondary' className='font-weight-bold'>Список товаров пуст. Создайте товар.</Alert>
+            }
+          </Container>
+        </Context.Provider>
       </>
     )
   }
